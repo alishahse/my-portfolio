@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Official Aceternity UI (Framer Motion) Hero Designs</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    /* Aceternity Spotlight Keyframes */
+    @keyframes spotlight {
+      0% {
+        opacity: 0;
+        transform: translate(-72%, -62%) scale(0.6);
+      }
+      100% {
+        opacity: 1;
+        transform: translate(-50%, -40%) scale(1);
+      }
+    }
+    .animate-spotlight {
+      animation: spotlight 2s ease .75s 1 forwards;
+    }
+
+    /* Aceternity Aurora Keyframes */
+    @keyframes aurora {
+      from {
+        background-position: 50% 50%, 50% 50%;
+      }
+      to {
+        background-position: 350% 50%, 350% 50%;
+      }
+    }
+    .animate-aurora {
+      animation: aurora 30s linear infinite;
+    }
+
+    /* Dot Grid Background Mask */
+    .bg-dot-grid {
+      background-size: 30px 30px;
+      background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    }
+
+    /* Linear Lamp Conic gradients */
+    .lamp-left-beam {
+      background: conic-gradient(from 70deg at center top, #14b8a6, transparent, transparent);
+    }
+    .lamp-right-beam {
+      background: conic-gradient(from 290deg at center top, transparent, transparent, #06b6d4);
+    }
+
+    /* Lamp opening transition */
+    @keyframes lampExpand {
+      0% { width: 12rem; opacity: 0.4; }
+      100% { width: 32rem; opacity: 1; }
+    }
+    .animate-lamp-beam {
+      animation: lampExpand 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Text Blur In Stagger */
+    @keyframes blurIn {
+      0% { opacity: 0; filter: blur(10px); transform: translateY(12px); }
+      100% { opacity: 1; filter: blur(0px); transform: translateY(0); }
+    }
+    .word-1 { animation: blurIn 0.4s ease-out 0.1s forwards; }
+    .word-2 { animation: blurIn 0.4s ease-out 0.2s forwards; }
+    .word-3 { animation: blurIn 0.4s ease-out 0.3s forwards; }
+    .word-4 { animation: blurIn 0.4s ease-out 0.4s forwards; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased min-h-screen p-3 sm:p-6 font-sans">
+  
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header & Source Verification -->
+    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 sm:p-6 backdrop-blur-xl shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold mb-2">
+          <span>⚡ Official Framer Motion Libraries (Aceternity UI)</span>
+        </div>
+        <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">
+          Top 3 Real Framer Motion Hero Components
+        </h1>
+        <p class="text-slate-400 text-sm mt-1">
+          Directly adapted from Aceternity UI (<a href="https://ui.aceternity.com" target="_blank" class="text-teal-400 underline hover:text-teal-300">ui.aceternity.com</a>), the #1 Framer Motion component library for React developers.
+        </p>
+      </div>
+
+      <!-- Real Component Switcher -->
+      <div class="flex items-center bg-slate-950 p-1.5 rounded-xl border border-slate-800 self-start md:self-auto shrink-0 gap-1">
+        <button id="btn-tab-1" onclick="switchDesign(1)" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 shadow-md">
+          1. Spotlight Hero
+        </button>
+        <button id="btn-tab-2" onclick="switchDesign(2)" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition-all">
+          2. Lamp Header
+        </button>
+        <button id="btn-tab-3" onclick="switchDesign(3)" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition-all">
+          3. Aurora Wave
+        </button>
+      </div>
+    </div>
+
+    <!-- Active Design Screen -->
+    <div class="bg-slate-950 border border-slate-800 rounded-3xl p-4 sm:p-8 shadow-2xl relative overflow-hidden min-h-[580px]">
+      
+      <!-- Component Badge & Official Docs Link -->
+      <div class="absolute top-4 right-4 z-40 flex items-center gap-2">
+        <a id="docs-link" href="https://ui.aceternity.com/components/spotlight" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-900/90 hover:bg-slate-800 text-teal-300 text-xs font-mono border border-slate-700 shadow-lg transition-all hover:scale-105">
+          <span>ui.aceternity.com/components/spotlight</span>
+          <span>↗</span>
+        </a>
+        <button onclick="replayCurrent()" class="px-3 py-1.5 rounded-full bg-slate-800/80 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 shadow-md">
+          Replay ↺
+        </button>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- OPTION 1: ACETERNITY SPOTLIGHT + RADIAL DOT GRID        -->
+      <!-- ======================================================== -->
+      <div id="design-view-1" class="relative z-10 transition-opacity duration-300">
+        
+        <!-- Official Aceternity SVG Spotlight Element -->
+        <svg
+          class="animate-spotlight pointer-events-none absolute -top-40 left-0 md:-top-20 md:left-40 z-[1] h-[169%] w-[138%] lg:w-[84%] opacity-0"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 3787 2842"
+          fill="none"
+        >
+          <g filter="url(#filter-spotlight)">
+            <ellipse
+              cx="1924.71"
+              cy="273.501"
+              rx="1924.71"
+              ry="273.501"
+              transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+              fill="#2dd4bf"
+              fill-opacity="0.28"
+            />
+          </g>
+          <defs>
+            <filter
+              id="filter-spotlight"
+              x="0.860352"
+              y="0.838989"
+              width="3785.16"
+              height="2840.26"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+              <feGaussianBlur stdDeviation="151" result="effect1_foregroundBlur_1065_8" />
+            </filter>
+          </defs>
+        </svg>
+
+        <!-- Aceternity Dot Background with Radial Center Mask -->
+        <div class="absolute inset-0 bg-dot-grid [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] pointer-events-none opacity-40"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-20 py-8 max-w-5xl mx-auto">
+          <!-- Left: Text with Text Generate Effect -->
+          <div class="lg:col-span-7 space-y-6 text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-teal-500/30 text-teal-300 text-xs font-mono">
+              <span class="w-2 h-2 rounded-full bg-teal-400 animate-ping"></span>
+              <span>Devstrix • Frontend Engineer</span>
+            </div>
+
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+              <span class="word-1 inline-block">Crafting</span>
+              <span class="word-2 inline-block">Scalable</span>
+              <span class="word-3 inline-block">Web Apps with</span>
+              <span class="word-4 block text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-300 to-teal-200">
+                React & Next.js
+              </span>
+            </h2>
+
+            <p class="text-slate-300 text-base leading-relaxed max-w-lg">
+              Hi, I'm <strong class="text-white">Ali Shah</strong>. I transform complex business logic into high-conversion user interfaces, from multi-step reservation wizards (<span class="text-teal-400">BookNow.co</span>) to enterprise operations CRMs.
+            </p>
+
+            <div class="flex items-center gap-4 pt-2">
+              <a href="#projects" class="px-6 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 font-bold text-sm shadow-lg shadow-teal-500/25 hover:scale-105 transition-all">
+                Explore Projects →
+              </a>
+              <a href="#contact" class="px-6 py-3 rounded-xl bg-slate-900 text-slate-200 border border-slate-700 font-semibold text-sm hover:bg-slate-800 transition-all">
+                Let's Talk
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Terminal Card highlighted by the Spotlight -->
+          <div class="lg:col-span-5">
+            <div class="bg-slate-900/90 border border-teal-500/30 rounded-2xl p-5 shadow-2xl backdrop-blur-xl hover:border-teal-400/60 transition-all">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                  <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                </div>
+                <span class="text-xs text-slate-400 font-mono">DeveloperProfile.jsx</span>
+                <span class="text-xs text-teal-400 font-mono">Spotlight Active</span>
+              </div>
+              <div class="font-mono text-xs leading-relaxed space-y-1 text-slate-300">
+                <p><span class="text-indigo-400">const</span> <span class="text-teal-300 font-bold">aliShah</span> = &#123;</p>
+                <p class="pl-4"><span class="text-slate-400">role:</span> <span class="text-amber-300">'Frontend Developer'</span>,</p>
+                <p class="pl-4"><span class="text-slate-400">company:</span> <span class="text-teal-300">'Devstrix'</span>,</p>
+                <p class="pl-4"><span class="text-slate-400">shipped:</span> [<span class="text-amber-300">'BookNow.co'</span>, <span class="text-amber-300">'Enterprise CRM'</span>],</p>
+                <p class="pl-4"><span class="text-slate-400">stack:</span> [<span class="text-teal-400">'React 19'</span>, <span class="text-teal-400">'Next.js'</span>, <span class="text-teal-400">'Framer Motion'</span>],</p>
+                <p class="pl-4"><span class="text-slate-400">performance:</span> <span class="text-emerald-400">'60 FPS Guaranteed'</span></p>
+                <p>&#125;;</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- OPTION 2: ACETERNITY LAMP SECTION CONTAINER (LINEAR VIBE) -->
+      <!-- ======================================================== -->
+      <div id="design-view-2" class="hidden transition-opacity duration-300">
+        
+        <!-- Aceternity Lamp Stage Container -->
+        <div class="relative flex flex-col items-center justify-center overflow-hidden w-full pt-16 pb-8">
+          
+          <!-- Top Conical Beams -->
+          <div class="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
+            <!-- Left Conic Beam -->
+            <div class="lamp-left-beam animate-lamp-beam absolute inset-auto right-1/2 h-48 w-[30rem] text-white">
+              <div class="absolute w-[100%] left-0 bg-slate-950 h-36 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]"></div>
+              <div class="absolute w-40 h-[100%] left-0 bg-slate-950 bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]"></div>
+            </div>
+            <!-- Right Conic Beam -->
+            <div class="lamp-right-beam animate-lamp-beam absolute inset-auto left-1/2 h-48 w-[30rem] text-white">
+              <div class="absolute w-40 h-[100%] right-0 bg-slate-950 bottom-0 z-20 [mask-image:linear-gradient(to_left,white,transparent)]"></div>
+              <div class="absolute w-[100%] right-0 bg-slate-950 h-36 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]"></div>
+            </div>
+
+            <!-- Central Glow Bulbs -->
+            <div class="absolute inset-auto z-40 h-32 w-[24rem] -translate-y-1/2 rounded-full bg-teal-500 opacity-50 blur-3xl"></div>
+            <div class="absolute inset-auto z-30 h-32 w-64 -translate-y-[5rem] rounded-full bg-cyan-400 blur-2xl"></div>
+            <!-- Neon Cyan Beam Line -->
+            <div class="animate-lamp-beam absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[6rem] bg-cyan-300 shadow-[0_0_15px_#06b6d4]"></div>
+          </div>
+
+          <!-- Content Rising from under the Lamp (Framer Motion initial y:100 to y:0) -->
+          <div class="relative z-50 flex flex-col items-center text-center px-4 max-w-3xl mx-auto space-y-5 -translate-y-6">
+            <span class="px-3.5 py-1 rounded-full bg-teal-500/10 border border-teal-500/40 text-teal-300 text-xs font-mono font-semibold">
+              ⚡ Linear-Grade Motion Architecture
+            </span>
+
+            <h2 class="text-3xl sm:text-6xl font-black text-white tracking-tight leading-none">
+              Build Faster. Scale Smoother. <br>
+              <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-cyan-300 to-teal-100">
+                React & Next.js Systems
+              </span>
+            </h2>
+
+            <p class="text-slate-300 text-base max-w-xl mx-auto leading-relaxed">
+              Hi, I'm <strong class="text-white">Ali Shah</strong>, Frontend Developer at <strong class="text-teal-400">Devstrix</strong>. Turning complex full-stack products into flawless, high-speed user interfaces.
+            </p>
+
+            <div class="flex items-center justify-center gap-4 pt-3">
+              <a href="#projects" class="px-7 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 font-bold text-sm shadow-xl shadow-teal-500/30 hover:scale-105 transition-all">
+                Explore Shipped Systems →
+              </a>
+              <a href="#contact" class="px-7 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-semibold text-sm hover:bg-slate-800 transition-all">
+                Get in Touch
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- OPTION 3: ACETERNITY AURORA BACKGROUND                   -->
+      <!-- ======================================================== -->
+      <div id="design-view-3" class="hidden transition-opacity duration-300">
+        
+        <!-- Aceternity Aurora Gradient Wave -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+          <div 
+            class="animate-aurora absolute -inset-[10px] opacity-45 will-change-transform filter blur-[30px]"
+            style="
+              background-image: repeating-linear-gradient(100deg, #14b8a6 10%, #06b6d4 15%, #6366f1 20%, #0ea5e9 25%, #14b8a6 30%);
+              background-size: 300% 200%;
+              background-position: 50% 50%;
+            "
+          ></div>
+          <div class="absolute inset-0 bg-slate-950/60 backdrop-blur-[40px]"></div>
+        </div>
+
+        <div class="relative z-10 text-center max-w-3xl mx-auto py-12 space-y-6">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-900/90 border border-teal-500/40 text-teal-300 text-xs font-mono font-bold shadow-xl">
+            <span>Aurora Background • Aceternity UI</span>
+          </div>
+
+          <h2 class="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
+            Crafting Scalable Web Apps with <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-cyan-300 to-indigo-400">
+              React & Next.js
+            </span>
+          </h2>
+
+          <p class="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+            Hi, I'm <strong class="text-white">Ali Shah</strong>. Frontend Developer at <strong class="text-teal-400">Devstrix</strong>. Specializing in high-performance web applications, 60 FPS interactions, and conversion-optimized architectures.
+          </p>
+
+          <div class="flex items-center justify-center gap-4 pt-2">
+            <a href="#projects" class="px-7 py-3.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 font-bold text-sm shadow-xl shadow-teal-500/30 hover:scale-105 transition-all">
+              Explore Projects →
+            </a>
+            <a href="#contact" class="px-7 py-3.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-200 font-semibold text-sm hover:bg-slate-800 transition-all">
+              Let's Talk
+            </a>
+          </div>
+
+          <!-- 3 Stats Pillars -->
+          <div class="grid grid-cols-3 gap-4 pt-8 max-w-xl mx-auto border-t border-slate-800/80">
+            <div>
+              <p class="text-2xl font-black text-teal-400">3+</p>
+              <p class="text-xs text-slate-400">Shipped Systems</p>
+            </div>
+            <div>
+              <p class="text-2xl font-black text-cyan-400">60 FPS</p>
+              <p class="text-xs text-slate-400">Performance Standard</p>
+            </div>
+            <div>
+              <p class="text-2xl font-black text-indigo-400">Devstrix</p>
+              <p class="text-xs text-slate-400">Production Role</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Official Source Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+      <!-- 1 -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-teal-400 uppercase tracking-wider">Option 1</span>
+          <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-teal-500/10 text-teal-300">Vercel / Next.js Style</span>
+        </div>
+        <h3 class="text-base font-bold text-white">Aceternity Spotlight</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Official Aceternity Spotlight SVG beam illuminating the left headline and right IDE terminal card, with subtle dot grid and staggered blur text reveal.
+        </p>
+        <div class="text-xs text-slate-300 font-mono space-y-1 pt-1">
+          <p>• Official: <code class="text-teal-400">&lt;Spotlight /&gt;</code></p>
+          <p>• Preserves current 2-column layout</p>
+          <p>• Words blur-in with spring physics</p>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-cyan-400 uppercase tracking-wider">Option 2</span>
+          <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-cyan-500/10 text-cyan-300">Linear.app Style</span>
+        </div>
+        <h3 class="text-base font-bold text-white">Aceternity Lamp Section</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          The famous Linear.app header. Opposing conical conic-gradient beams open up from top with glowing cyan neon bar, while the hero text elevates up from below.
+        </p>
+        <div class="text-xs text-slate-300 font-mono space-y-1 pt-1">
+          <p>• Official: <code class="text-cyan-400">&lt;LampContainer /&gt;</code></p>
+          <p>• Conic gradient light physics</p>
+          <p>• High-impact cinema aesthetic</p>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold text-indigo-400 uppercase tracking-wider">Option 3</span>
+          <span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-indigo-500/10 text-indigo-300">Apple / Stripe Style</span>
+        </div>
+        <h3 class="text-base font-bold text-white">Aceternity Aurora Background</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Organic multi-gradient aurora fluid wave running continuously in the backdrop, with frosted glassmorphic text elevation and dual CTAs.
+        </p>
+        <div class="text-xs text-slate-300 font-mono space-y-1 pt-1">
+          <p>• Official: <code class="text-indigo-400">&lt;AuroraBackground /&gt;</code></p>
+          <p>• Seamless infinite wave motion</p>
+          <p>• Ultra-modern soft contrast</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const docs = {
+      1: "https://ui.aceternity.com/components/spotlight",
+      2: "https://ui.aceternity.com/components/lamp",
+      3: "https://ui.aceternity.com/components/aurora-background"
+    };
+
+    function switchDesign(num) {
+      for (let i = 1; i <= 3; i++) {
+        const view = document.getElementById('design-view-' + i);
+        const btn = document.getElementById('btn-tab-' + i);
+        if (i === num) {
+          view.classList.remove('hidden');
+          btn.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-gradient-to-r from-teal-500 to-cyan-500 text-slate-950 shadow-md";
+        } else {
+          view.classList.add('hidden');
+          btn.className = "px-3.5 py-2 rounded-lg text-xs sm:text-sm font-medium text-slate-400 hover:text-white transition-all";
+        }
+      }
+      document.getElementById('docs-link').href = docs[num];
+      document.getElementById('docs-link').querySelector('span').innerText = docs[num].replace('https://', '');
+    }
+
+    function replayCurrent() {
+      for (let i = 1; i <= 3; i++) {
+        const view = document.getElementById('design-view-' + i);
+        if (!view.classList.contains('hidden')) {
+          view.style.opacity = '0';
+          setTimeout(() => { view.style.opacity = '1'; }, 100);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

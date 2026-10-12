@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Lato', sans-serif;
+  }
+
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans antialiased;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 900;
+  }
+
+  p {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+  }
+}
+
+/* Enforce Lato 900 (Black) on all headings and elements within headings */
+h1, h2, h3, h4, h5, h6,
+h1 *, h2 *, h3 *, h4 *, h5 *, h6 * {
+  font-family: 'Lato', sans-serif !important;
+  font-weight: 900 !important;
+}
+
+/* Enforce Lato 300 (Light) on paragraphs and normal copy */
+p,
+p span,
+.font-light {
+  font-family: 'Lato', sans-serif;
+  font-weight: 300 !important;
+}
+
+p strong, p b {
+  font-weight: 700 !important;
+}
+
+/* Preserve terminal / code editor monospace font */
+code, pre, .font-mono, .font-mono * {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6366f1;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(30, 41, 59, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-card:hover {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+/* Gentle floating animation for code card */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: gentle-float 4.5s ease-in-out infinite;
+}
+
+/* Infinite sliding marquee for skills ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Navbar CTA Button Left-to-Right Reveal with 1s initial delay */
+@keyframes buttonRevealFromLeft {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-30px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateX(0);
+  }
+}
+
+.animate-btn-reveal {
+  opacity: 0;
+  animation: buttonRevealFromLeft 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+}
